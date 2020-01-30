@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What's My IP | What is your public and/or private (LAN) IP?</title>
+    <title>What's My IP | What is your public IP?</title>
 </head>
 <body>
+    <div class="warning-container hidden">
+        <div class="warning"></div>
+    </div>
 
+    <div class="container">
+        <h3>Your public IP:</h3>
+        <div>
+            <h2 id="local-ip"></h2>
+        </div>
+    </div>
+
+
+    <script>
+        let warningContainer = document.querySelector(".warning-container");
+        let warningElement = document.querySelector(".warning");
+        let warningShown = false;
+        function warning(text) {
+            let paragraph = document.createElement("p");
+            paragraph.innerText = text;
+            warningElement.appendChild(paragraph);
+            if (!warningShown) {
+                warningContainer.classList.remove("hidden");
+                warningShown = true;
+            }
+        }
+
+
+        if (typeof fetch !== "function") {
+            warning("Please be aware that your browser might be too old to work properly with this website");
+        }
+
+        //fetch("https://myip.halex.dev/cdn-cgi/trace").then(resp => resp.text()).then(
+        //    text => console.log(text)
+        //);
+    </script>
+    <style>
+        html, body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin: 0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        .warning-container {
+            margin: 40px 16px;
+            padding: 32px 24px;
+            background-color: hsl(41, 54%, 53%);
+            color: #ffffff;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
 </body>
 </html>
